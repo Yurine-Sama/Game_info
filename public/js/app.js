@@ -5587,7 +5587,7 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     var _this = this;
 
-    axios.get("http://localhost/api/product").then(function (data) {
+    axios.get("/api/product").then(function (data) {
       _this.games = data.data;
     })["catch"](function (err) {
       return console.log(err);
@@ -5597,7 +5597,7 @@ __webpack_require__.r(__webpack_exports__);
     buyGame: function buyGame(id) {
       var _this2 = this;
 
-      axios.get("http://localhost/api/product/show/".concat(id)).then(function (data) {
+      axios.get("/api/product/show/".concat(id)).then(function (data) {
         _this2.productId = data.data.id;
         _this2.productName = data.data.product_name;
         _this2.productImg = data.data.product_image;
@@ -5852,7 +5852,7 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     var _this = this;
 
-    axios.get("http://localhost/api/product").then(function (data) {
+    axios.get("/api/product").then(function (data) {
       _this.games = data.data;
     })["catch"](function (err) {
       return console.log(err);
@@ -5861,7 +5861,7 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     // Add product function
     addProduct: function addProduct() {
-      axios.post("http://localhost/api/product/store", {
+      axios.post("/api/product/store", {
         product_name: this.productName,
         product_image: this.productImg,
         price: this.price,
@@ -5878,7 +5878,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this2 = this;
 
       // API Get data from id and set it on from
-      axios.get("http://localhost/api/product/show/".concat(id)).then(function (data) {
+      axios.get("/api/product/show/".concat(id)).then(function (data) {
         _this2.productId = data.data.id, _this2.productName = data.data.product_name;
         _this2.productImg = data.data.product_image;
         _this2.price = data.data.price;
@@ -5886,7 +5886,7 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     updateProduct: function updateProduct() {
-      axios.post("http://localhost/api/product/update/".concat(this.productId), {
+      axios.post("/api/product/update/".concat(this.productId), {
         product_name: this.productName,
         product_image: this.productImg,
         price: this.price,
@@ -5903,7 +5903,7 @@ __webpack_require__.r(__webpack_exports__);
       var isComfirm = confirm("Are you sure to delete this game?");
 
       if (isComfirm == true) {
-        axios["delete"]("http://localhost/api/product/del/".concat(id)).then(function () {
+        axios["delete"]("/api/product/del/".concat(id)).then(function () {
           alert("Delete product success.");
           window.location.reload();
         })["catch"](function (err) {
@@ -6063,12 +6063,13 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   created: function created() {
-    this.searchText = window.location.href.split("http://localhost/search/")[1];
+    var route = window.location.href.split("/");
+    this.searchText = route[route.length - 1];
   },
   mounted: function mounted() {
     var _this = this;
 
-    axios.get("http://localhost/api/product/search/".concat(this.searchText)).then(function (data) {
+    axios.get("/api/product/search/".concat(this.searchText)).then(function (data) {
       _this.games = data.data;
     })["catch"](function (err) {
       return console.log(err);
@@ -6078,7 +6079,7 @@ __webpack_require__.r(__webpack_exports__);
     buyGame: function buyGame(id) {
       var _this2 = this;
 
-      axios.get("http://localhost/api/product/show/".concat(id)).then(function (data) {
+      axios.get("/api/product/show/".concat(id)).then(function (data) {
         _this2.productId = data.data.id;
         _this2.productName = data.data.product_name;
         _this2.productImg = data.data.product_image;

@@ -136,11 +136,12 @@ export default {
     };
   },
   created() {
-    this.searchText = window.location.href.split("http://localhost/search/")[1];
+    const route = window.location.href.split("/");
+    this.searchText = route[route.length - 1];
   },
   mounted() {
     axios
-      .get(`http://localhost/api/product/search/${this.searchText}`)
+      .get(`/api/product/search/${this.searchText}`)
       .then((data) => {
         this.games = data.data;
       })
@@ -148,7 +149,7 @@ export default {
   },
   methods: {
     buyGame(id) {
-      axios.get(`http://localhost/api/product/show/${id}`).then((data) => {
+      axios.get(`/api/product/show/${id}`).then((data) => {
         this.productId = data.data.id;
         this.productName = data.data.product_name;
         this.productImg = data.data.product_image;

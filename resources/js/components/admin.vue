@@ -228,7 +228,7 @@ export default {
   },
   mounted() {
     axios
-      .get("http://localhost/api/product")
+      .get("/api/product")
       .then((data) => {
         this.games = data.data;
       })
@@ -238,7 +238,7 @@ export default {
     // Add product function
     addProduct() {
       axios
-        .post("http://localhost/api/product/store", {
+        .post("/api/product/store", {
           product_name: this.productName,
           product_image: this.productImg,
           price: this.price,
@@ -254,7 +254,7 @@ export default {
     // Update product function
     updateModal(id) {
       // API Get data from id and set it on from
-      axios.get(`http://localhost/api/product/show/${id}`).then((data) => {
+      axios.get(`/api/product/show/${id}`).then((data) => {
         (this.productId = data.data.id),
           (this.productName = data.data.product_name);
         this.productImg = data.data.product_image;
@@ -264,7 +264,7 @@ export default {
     },
     updateProduct() {
       axios
-        .post(`http://localhost/api/product/update/${this.productId}`, {
+        .post(`/api/product/update/${this.productId}`, {
           product_name: this.productName,
           product_image: this.productImg,
           price: this.price,
@@ -282,7 +282,7 @@ export default {
       const isComfirm = confirm("Are you sure to delete this game?");
       if (isComfirm == true) {
         axios
-          .delete(`http://localhost/api/product/del/${id}`)
+          .delete(`/api/product/del/${id}`)
           .then(() => {
             alert("Delete product success.");
             window.location.reload();

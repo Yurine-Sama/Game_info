@@ -222,7 +222,7 @@ export default {
   },
   mounted() {
     axios
-      .get("http://localhost/api/product")
+      .get("/api/product")
       .then((data) => {
         this.games = data.data;
       })
@@ -230,7 +230,7 @@ export default {
   },
   methods: {
     buyGame(id) {
-      axios.get(`http://localhost/api/product/show/${id}`).then((data) => {
+      axios.get(`/api/product/show/${id}`).then((data) => {
         this.productId = data.data.id;
         this.productName = data.data.product_name;
         this.productImg = data.data.product_image;
