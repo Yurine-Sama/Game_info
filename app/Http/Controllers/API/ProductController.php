@@ -105,14 +105,4 @@ class ProductController extends Controller
         ])->get();
         return $products;
     }
-
-    // public function search(Request $request)
-    // {
-    //     if ($request->has('search')) {
-    //         $game = Products::where('product_name', 'LIKE', '%' . $request->search . '%')->paginate(5);
-    //     } else {
-    //         $game = Products::paginate(5);
-    //     }
-    //     return view('home', compact('$game'));
-    // }   
 }

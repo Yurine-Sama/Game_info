@@ -35,6 +35,8 @@ class HomeController extends Controller
     {
         if (Auth::user()->email != 'admin@admin.com') {
             return redirect('/home');
+        } else {
+            return view('admin');
         }
     }
 
