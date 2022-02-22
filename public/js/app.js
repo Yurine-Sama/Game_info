@@ -5566,6 +5566,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -29190,6 +29196,15 @@ var staticRenderFns = [
                 staticClass: "d-block w-100",
                 attrs: {
                   src: "https://www.anime-os.com/info/image/2021/10/arknights-game-keyvisual-5.jpg.webp",
+                },
+              }),
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "carousel-item" }, [
+              _c("img", {
+                staticClass: "d-block w-100",
+                attrs: {
+                  src: "https://www.pcgamesn.com/wp-content/uploads/2020/10/best-anime-games-pcgamesn.jpg",
                 },
               }),
             ]),

@@ -65,6 +65,12 @@
                             class="d-block w-100"
                           />
                         </div>
+                        <div class="carousel-item">
+                          <img
+                            src="https://www.pcgamesn.com/wp-content/uploads/2020/10/best-anime-games-pcgamesn.jpg"
+                            class="d-block w-100"
+                          />
+                        </div>
                       </div>
                       <button
                         class="carousel-control-prev"
@@ -233,9 +239,9 @@ export default {
       });
     },
 
-    searchClick(){
-      window.location.replace(`/search/${this.searchText}`)
-    }
+    searchClick() {
+      window.location.replace(`/search/${this.searchText}`);
+    },
   },
 };
 </script>
