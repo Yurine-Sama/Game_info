@@ -1,5 +1,6 @@
 <template>
   <div class="container">
+    <!-- meta csrf -->
     <div class="row justify-content-center">
       <div class="col-12">
         <div class="card">
@@ -100,46 +101,64 @@
                   </div>
                   <div class="col-12">
                     <!-- Games -->
+
                     <div class="row my-5">
                       <!-- Loop games -->
+
                       <div class="col-6" v-for="game in games" :key="game.id">
-                        <div class="card mb-3" style="max-width: 540px">
-                          <div class="row g-0">
-                            <div class="col-md-4">
-                              <img
-                                :src="game.product_image"
-                                class="img-fluid rounded-start"
-                              />
-                            </div>
-                            <div class="col-md-8">
-                              <div class="card-body">
-                                <h5 class="card-title">
-                                  {{ game.product_name }}
-                                </h5>
-                                <p class="card-text text-truncate mt-2">
-                                  {{ game.description }}
-                                </p>
-                                <h4 class="card-text mt-5">
-                                  Price : {{ game.price }} ฿
-                                </h4>
-                                <div class="card-text">
-                                  <!-- buy btn -->
-                                  <div class="d-grid gap-2 mt-5">
-                                    <button
-                                      type="button"
-                                      data-bs-toggle="modal"
-                                      data-bs-target="#buyGame"
-                                      class="btn btn-primary btn-block"
-                                      @click="buyGame(game.id)"
-                                    >
-                                      Read more
-                                    </button>
+                        <form action="orders" method="POST">
+                          <!-- check csrf to go order page -->
+                          <input type="hidden" name="_token" :value="csrf" />
+                          <!-- check product id -->
+                          <input
+                            type="hidden"
+                            name="product_id"
+                            :value = game.id
+                          />
+                          <div class="card mb-3" style="max-width: 540px">
+                            <div class="row g-0">
+                              <div class="col-md-4">
+                                <img
+                                  :src="game.product_image"
+                                  class="img-fluid rounded-start"
+                                />
+                              </div>
+                              <div class="col-md-8">
+                                <div class="card-body">
+                                  <h5 class="card-title">
+                                    {{ game.product_name }}
+                                  </h5>
+                                  <p class="card-text text-truncate mt-2">
+                                    {{ game.description }}
+                                  </p>
+                                  <h4 class="card-text mt-5">
+                                    Price : {{ game.price }} ฿
+                                  </h4>
+                                  <div class="card-text">
+                                    <!-- buy btn -->
+                                    <div class="d-grid gap-2 mt-5">
+                                      <button
+                                        type="button"
+                                        data-bs-toggle="modal"
+                                        data-bs-target="#buyGame"
+                                        class="btn btn-info btn-block"
+                                        @click="buyGame(game.id)"
+                                      >
+                                        Read more
+                                      </button>
+                                      <button
+                                        class="btn btn-primary btn-block"
+                                        :value="csrf"
+                                      >
+                                        buy
+                                      </button>
+                                    </div>
                                   </div>
                                 </div>
                               </div>
                             </div>
                           </div>
-                        </div>
+                        </form>
 
                         <!-- Modal -->
                         <div
@@ -187,7 +206,10 @@
                                 ></textarea>
                               </div>
                               <div class="text-center">
-                                <h2>in steam {{ price }} ฿</h2>
+                                <h2>{{ price }} ฿</h2>
+                              </div>
+                              <div class="row">
+                                <div class="col text-center mt-2"></div>
                               </div>
                             </div>
                           </div>
@@ -208,15 +230,18 @@
 
 <script>
 export default {
+  props: ["post-route"],
   data() {
     return {
+      csrf: document
+        .querySelector('meta[name="csrf-token"]')
+        .getAttribute("content"),
       games: [],
       productId: "",
       productName: "",
       productImg: "",
       price: "",
       description: "",
-
       searchText: null,
     };
   },
