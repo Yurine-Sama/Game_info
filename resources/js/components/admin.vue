@@ -12,6 +12,20 @@
                     <h1>Game Store</h1>
                   </div>
                   <div class="col text-end my-2">
+                    <a
+                      href="admin/CheckOrder"
+                      type="button"
+                      class="btn btn-outline-primary me-md-2"
+                    >
+                      Order Check
+                    </a>
+                    <a
+                      href="admin/Checkout"
+                      type="button"
+                      class="btn btn-outline-primary me-md-2"
+                    >
+                      Order Details
+                    </a>
                     <button
                       type="button"
                       class="btn btn-success me-md-2"

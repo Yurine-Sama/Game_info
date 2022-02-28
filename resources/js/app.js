@@ -28,7 +28,12 @@ Vue.component("product-admin", require("./components/admin.vue").default);
 
 Vue.component("search-component", require("./components/search.vue").default);
 
-Vue.component("order-component", require("./components/order.vue").default);
+Vue.component("order-component", require("./components/checkout.vue").default);
+
+Vue.component(
+    "check_order-component",
+    require("./components/CheckOrder.vue").default
+);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application

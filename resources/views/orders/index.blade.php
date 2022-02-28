@@ -51,11 +51,13 @@
                         <td></td>
                         <td>{{ $order -> total }}</td>
                         <td class="text-center">
+
                             <form action="{{route('orders.update', $order->id)}}" method="POST">
                                 @csrf
                                 @method('put')
                                 <input type="hidden" name="value" value="checkout">
                                 <button class="btn btn-outline-success" type="submit">Checkout</button>
+
                             </form>
                         </td>
                     </tr>

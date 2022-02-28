@@ -19,6 +19,7 @@ class OrderController extends Controller
     {
         // 0 = Cart , 1 = Check out
         $order = Order::where('user_id', Auth::id())->where('status', 0)->first();
+
         return view('orders.index')->with('order', $order);
     }
 
@@ -145,5 +146,10 @@ class OrderController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function showOrder()
+    {
+        return Order::all();
     }
 }

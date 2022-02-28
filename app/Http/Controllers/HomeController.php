@@ -44,4 +44,22 @@ class HomeController extends Controller
     {
         return view('search');
     }
+
+    public function admin_checkout()
+    {
+        if (Auth::user()->email != 'admin@admin.com') {
+            return redirect('/home');
+        } else {
+            return view('orders.checkout');
+        }
+    }
+
+    public function admin_orderCheck()
+    {
+        if (Auth::user()->email != 'admin@admin.com') {
+            return redirect('/home');
+        } else {
+            return view('orders.checkOrder');
+        }
+    }
 }
