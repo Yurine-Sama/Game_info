@@ -31,25 +31,55 @@ class OrderController extends Controller
     public function store(Request $request)
     {
         //
-        $prepareCart = [
-            'status' => 0,
-            'user_name' => Auth::user()->name,
-            'total' => 0,
-            'user_id' => Auth::id()
-        ];
-
-        $order = Order::create($prepareCart);
-
         $product = Products::find($request->product_id);
+        $order = Order::where('user_id', Auth::id())->where('status', 0)->first();
+        // check that user already have a product in cast or not if not create a order
+        if ($order) {
+            $order_Detail = $order->order_details()->where('product_id', $product->id)->first();
 
-        $prepareCartDetail = [
-            'order_id' => $order->id,
-            'product_id' => $product->id,
-            'product_name' => $product->product_name,
-            'amount' => 1,
-            'price' => $product->price,
-        ];
-        $orderDetail = OrderDetail::create($prepareCartDetail);
+            if ($order_Detail) {
+                $newAmount = $order_Detail->amount + 1;
+                $order_Detail->update([
+                    'amount' => $newAmount
+                ]);
+            } else {
+                $prepareCartDetail = [
+                    'order_id' => $order->id,
+                    'product_id' => $product->id,
+                    'product_name' => $product->product_name,
+                    'amount' => 1,
+                    'price' => $product->price,
+                ];
+                $order_Detail = OrderDetail::create($prepareCartDetail);
+            }
+        } else {
+            $prepareCart = [
+                'status' => 0,
+                'user_name' => Auth::user()->name,
+                'total' => 0,
+                'user_id' => Auth::id()
+            ];
+            $order = Order::create($prepareCart);
+
+            $prepareCartDetail = [
+                'order_id' => $order->id,
+                'product_id' => $product->id,
+                'product_name' => $product->product_name,
+                'amount' => 1,
+                'price' => $product->price,
+            ];
+            $order_Detail = OrderDetail::create($prepareCartDetail);
+        }
+
+        $sum = 0;
+        $total = $order->order_details->map(function ($order_Detail) use ($sum) {
+            $sum += $order_Detail->amount * $order_Detail->price;
+            return $sum;
+        })->toArray();
+
+        $order->update([
+            'total' => array_sum($total)
+        ]);
 
         return redirect()->route('home');
     }
@@ -72,9 +102,38 @@ class OrderController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Order $order)
     {
-        //
+        $order_Detail = $order->order_details()->where('product_id', $request->product_id)->first();
+        //Check out Order
+        if ($request->value = "checkout") {
+            $order->update([
+                'status' => 1
+            ]);
+        } else {
+            if ($order_Detail) {
+                if ($request->value == "increase") {
+                    $newAmount = $order_Detail->amount + 1;
+                } else {
+                    $newAmount = $order_Detail->amount - 1;
+                }
+                $order_Detail->update([
+                    'amount' => $newAmount
+                ]);
+            }
+            //update sum for price
+            $sum = 0;
+            $total = $order->order_details->map(function ($order_Detail) use ($sum) {
+                $sum += $order_Detail->amount * $order_Detail->price;
+                return $sum;
+            })->toArray();
+
+            $order->update([
+                'total' => array_sum($total)
+            ]);
+        }
+
+        return redirect()->route('orders.index');
     }
 
     /**
