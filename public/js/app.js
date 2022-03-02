@@ -5646,14 +5646,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ["post-route"],
   data: function data() {
@@ -29505,51 +29497,39 @@ var render = function () {
                                     _vm._v(" "),
                                     _c(
                                       "div",
-                                      { staticClass: "mb-3 text-center" },
+                                      { staticClass: "container my-4" },
                                       [
                                         _c(
-                                          "label",
+                                          "h3",
                                           {
-                                            staticClass: "form-label",
-                                            attrs: {
-                                              for: "exampleFormControlTextarea1",
+                                            staticStyle: {
+                                              color: "#00BFFF",
+                                              "font-weight": "bold",
                                             },
                                           },
-                                          [_vm._v("info")]
+                                          [_vm._v("Information")]
                                         ),
                                         _vm._v(" "),
-                                        _c("textarea", {
-                                          directives: [
-                                            {
-                                              name: "model",
-                                              rawName: "v-model",
-                                              value: _vm.description,
-                                              expression: "description",
-                                            },
-                                          ],
-                                          staticClass: "form-control",
-                                          attrs: {
-                                            readonly: "",
-                                            id: "exampleFormControlTextarea1",
-                                            rows: "3",
-                                          },
-                                          domProps: { value: _vm.description },
-                                          on: {
-                                            input: function ($event) {
-                                              if ($event.target.composing) {
-                                                return
-                                              }
-                                              _vm.description =
-                                                $event.target.value
+                                        _c(
+                                          "p",
+                                          {
+                                            staticStyle: {
+                                              "text-indent": "50px",
                                             },
                                           },
-                                        }),
+                                          [_vm._v(_vm._s(_vm.description))]
+                                        ),
                                       ]
                                     ),
                                     _vm._v(" "),
                                     _c("div", { staticClass: "text-center" }, [
                                       _c("h2", [
-                                        _vm._v(_vm._s(_vm.price) + " ฿"),
+                                        _c(
+                                          "span",
+                                          { staticStyle: { color: "red" } },
+                                          [_vm._v("PRICE")]
+                                        ),
+                                        _vm._v(" " + _vm._s(_vm.price) + " ฿"),
                                       ]),
                                     ]),
                                     _vm._v(" "),

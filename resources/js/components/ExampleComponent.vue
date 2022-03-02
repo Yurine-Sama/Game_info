@@ -113,7 +113,7 @@
                           <input
                             type="hidden"
                             name="product_id"
-                            :value = game.id
+                            :value="game.id"
                           />
                           <div class="card mb-3" style="max-width: 540px">
                             <div class="row g-0">
@@ -190,23 +190,15 @@
                                   style="max-height: 300px"
                                 />
                               </div>
-                              <!-- text area -->
-                              <div class="mb-3 text-center">
-                                <label
-                                  for="exampleFormControlTextarea1"
-                                  class="form-label"
-                                  >info</label
-                                >
-                                <textarea
-                                  readonly
-                                  class="form-control"
-                                  id="exampleFormControlTextarea1"
-                                  rows="3"
-                                  v-model="description"
-                                ></textarea>
+
+                              <!-- Description -->
+                              <div class="container my-4">
+                                <h3 style="color: #00BFFF; font-weight: bold">Information</h3>
+                                <p style="text-indent: 50px">{{ description }}</p>
                               </div>
+
                               <div class="text-center">
-                                <h2>{{ price }} ฿</h2>
+                                <h2><span style="color: red">PRICE</span> {{ price }} ฿</h2>
                               </div>
                               <div class="row">
                                 <div class="col text-center mt-2"></div>
