@@ -16,7 +16,7 @@ class OrderDetailController extends Controller
     public function index()
     {
         //
-        return OrderDetail::all();
+
     }
 
     /**
@@ -83,5 +83,9 @@ class OrderDetailController extends Controller
     public function destroy(OrderDetail $orderDetail)
     {
         //
+    }
+    public function showOderDetails()
+    {
+        return OrderDetail::all();
     }
 }

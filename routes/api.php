@@ -33,8 +33,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 
     //admin only
     Route::get('admin/order', [OrderController::class, 'showOrder']);
-    Route::get('/Checkout', [OrderDetailController::class, 'index']);
-
+    Route::get('/Checkout', [OrderDetailController::class, 'showOderDetails']);
     Route::post('/logout', [AuthController::class, 'logout']);
 });
 
